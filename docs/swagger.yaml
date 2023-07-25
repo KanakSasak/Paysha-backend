@@ -1,0 +1,321 @@
+definitions:
+  dto.CustAdminResponse:
+    properties:
+      active:
+        type: boolean
+      address:
+        type: string
+      create_date:
+        type: string
+      create_time:
+        type: string
+      created_by:
+        type: string
+      email:
+        type: string
+      fire-uid:
+        type: string
+      id:
+        type: integer
+      last_change_by:
+        type: string
+      last_update_date:
+        type: string
+      last_update_time:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+      wallet-id:
+        type: string
+    type: object
+  dto.LoginRequest:
+    properties:
+      code:
+        type: string
+      device_id:
+        type: string
+      device_type:
+        type: string
+      phone:
+        type: string
+      signing_method:
+        type: string
+      token_fcm:
+        type: string
+    type: object
+  dto.LoginResponse:
+    properties:
+      data: {}
+      expires:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.RegisterRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+    type: object
+  dto.RegisterResponse:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      uid:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a api documentation for PaySha payment system.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  version: "2.0"
+paths:
+  /v1/cust/auth/login:
+    post:
+      parameters:
+      - description: Login
+        in: body
+        name: Auth
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.LoginResponse'
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Auth Customer
+      tags:
+      - Auth
+  /v1/cust/auth/refresh:
+    get:
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.LoginResponse'
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Auth Refresh
+      tags:
+      - Auth
+  /v1/cust/auth/register:
+    post:
+      parameters:
+      - description: Register
+        in: body
+        name: Auth
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.RegisterResponse'
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      summary: Auth Customer
+      tags:
+      - Auth
+  /v1/cust/bayar/:idtujuan/:amount:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: POST
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Pembayaran Sukses
+          schema:
+            type: string
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Payment
+      tags:
+      - Customer
+  /v1/cust/get:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.CustAdminResponse'
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Get Customer
+      tags:
+      - Customer
+  /v1/cust/get/wallet:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: eDUwOTo6Q049dXNlcjMsT1U9Y2xpZW50OjpDTj1mYWJyaWMtY2Etc2VydmVy
+          schema:
+            type: string
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Wallet Id
+      tags:
+      - Customer
+  /v1/cust/get/wallet/balance:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Get
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: "100000"
+          schema:
+            type: string
+        "400":
+          description: error
+          schema:
+            type: string
+        "401":
+          description: error
+          schema:
+            type: string
+        "500":
+          description: error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Wallet Balance
+      tags:
+      - Customer
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
